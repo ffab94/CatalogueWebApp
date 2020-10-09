@@ -1,0 +1,53 @@
+<div class="panel panel-default">
+  <div class="panel-heading">Gestion des Catégories</div>
+  <div class="panel-body">
+    <div>
+      <button class="btn btn-success" (click)="onNewCategory()">
+        <span class="glyphicon glyphicon-plus"></span>
+      </button>
+    </div>
+    <div *ngIf="mode=='new-cat'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onSaveCategory(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control">
+        </div>
+        <button class="btn btn-success" type="submit">Save</button>
+      </form>
+    </div>
+    <div *ngIf="mode=='edit-cat'" class="col-md-6">
+      <form #f="ngForm" (ngSubmit)="onUpdateCategory(f.value)">
+        <div class="form-group">
+          <label class="control-label">Name</label>
+          <input type="text" name="name" ngModel class="form-control" [(ngModel)]="currentCategory.name">
+        </div>
+        <button class="btn btn-success" type="submit">Update</button>
+      </form>
+    </div>
+    <p></p>
+    <div *ngIf="mode=='list-cat'">
+      <table class="table" *ngIf="categories">
+        <thead>
+        <tr>
+          <th>Name</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of categories._embedded.categories">
+          <td>{{c.name}}</td>
+          <td>
+            <button class="btn btn-danger" (click)="onDeleteCat(c)">
+              <span class="glyphicon glyphicon-remove"></span>
+            </button>
+          </td>
+          <td>
+            <button class="btn btn-default" (click)="onEditCat(c)">
+              <span class="glyphicon glyphicon-edit"></span>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
