@@ -5,6 +5,7 @@ import {AuthenticationService} from './authentication.service';
 @Injectable({
   providedIn: 'root'
 })
+
 export class CatalogueService {
   public host:string="http://localhost:8080";
 
